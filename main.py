@@ -47,3 +47,6 @@ class GameStateManager:
 if __name__ == '__main__':
     game = Game()
     game.run()
+
+
+#В конфиге поменяй разрешение экрана на прежнее, если у тебя что то не так.
