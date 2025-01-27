@@ -14,16 +14,17 @@ class MainMenu:
 
         self.part_sys = ParticleSystem(self.display)
         self.fire = Fire((255, 0, 0), 16, self.display)
-        self.text_list = [Text(140, "GRIEF", (200, 0, 0), (60, 350), self.display)]
+        self.text_list = [Text(140, "Sunset", (200, 0, 0), (60, 350), self.display)]
         self.buttons = [
             Button(60, 520, 170, 50, (200, 0, 0), (150, 0, 0),
-                   (100, 0, 0), 32, self.display, 'game', "Start"),
+                   (100, 0, 0), 32, self.start, self.display, 'Start'),
             Button(260, 520, 170, 50, (200, 0, 0), (150, 0, 0),
-                   (100, 0, 0), 32, self.display, 'opt', "Options"),
+                   (100, 0, 0), 32, lambda: print("Hello"), self.display, 'Options'),
             Button(460, 520, 170, 50, (200, 0, 0), (150, 0, 0),
-                   (100, 0, 0), 32, self.display, 'credits', "Credits"),
+                   (100, 0, 0), 32, lambda: print("Hello"), self.display, 'Credits'),
             Button(660, 520, 170, 50, (200, 0, 0), (150, 0, 0),
-                   (100, 0, 0), 32, self.display, 'exit', "Exit")]
+                   (100, 0, 0), 32, quit, self.display, 'Exit')
+        ]
         self.button_f = ""
 
     def run(self):
@@ -46,3 +47,11 @@ class MainMenu:
             if button.click(mouse_pos, mouse_pressed):
                 self.button_f = button.click_func
             button.draw()
+
+    def start(self):
+        self.game_state_manager.set_state('World')
+
+    @staticmethod
+    def quit():
+        sys.exit()
+        pygame.quit()

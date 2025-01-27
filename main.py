@@ -39,15 +39,6 @@ class World:
         self.display.fill('blue')
 
 
-# class MainMenu:
-#     def __init__(self, display, game_state_manager):
-#         self.display = display
-#         self.game_state_manager = game_state_manager
-#
-#     def run(self):
-#         self.display.fill('red')
-
-
 class GameStateManager:
     def __init__(self, current_state):
         self.current_state = current_state
