@@ -6,10 +6,10 @@ from config import *
 
 
 class Fire:
-    def __init__(self, color, iterations):
+    def __init__(self, color, iterations, display):
         self.color = color
         self.iterations = iterations
-        self.screen = game_surface
+        self.display = display
 
     def draw(self):
         for i in range(1, self.iterations + 1):
@@ -20,9 +20,9 @@ class Fire:
             height_var = int(30 * (math.sin(time.time())))
 
             pygame.draw.rect(
-                self.screen,
+                self.display,
                 tuple(new_color),
-                pygame.Rect(0, GAME_HEIGHT + 50 - i * 50 - height_var, GAME_WIDTH, 50)
+                pygame.Rect(0, SCREENWIDTH + 50 - i * 50 - height_var, SCREENHEIGHT, 50)
             )
 
 
@@ -55,15 +55,17 @@ class Particle:
     def draw(self, screen):
         screen.blit(self.surface, (self.x, self.y))
 
+
 color_list = [(255, 0, 0), (255, 100, 0), (0, 0, 0)]
 
+
 class ParticleSystem:
-    def __init__(self) -> None:
+    def __init__(self, display) -> None:
         self.particles = []
-        self.screen = game_surface
+        self.display = display
 
     def add_particle(self):
-        part = Particle(random.randint(0, GAME_WIDTH), GAME_HEIGHT - 10, random.choice(color_list), random.randint(1, 2),
+        part = Particle(random.randint(0, SCREENWIDTH), SCREENHEIGHT - 10, random.choice(color_list), random.randint(1, 2),
                         random.randint(200, 300))
         self.particles.append(part)
 
@@ -74,4 +76,4 @@ class ParticleSystem:
         self.particles = [p for p in self.particles if p.is_alive()]
 
         for particle in self.particles:
-            particle.draw(game_surface)
+            particle.draw(self.display)

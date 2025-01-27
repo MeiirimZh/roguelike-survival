@@ -2,6 +2,7 @@ import pygame
 import sys
 
 from config import SCREENWIDTH, SCREENHEIGHT, FPS
+from scenes.main_menu import MainMenu
 
 
 class Game:
@@ -10,7 +11,7 @@ class Game:
         self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT), pygame.FULLSCREEN)
         self.clock = pygame.time.Clock()
 
-        self.game_state_manager = GameStateManager('World')
+        self.game_state_manager = GameStateManager('Main Menu')
         self.main_menu = MainMenu(self.screen, self.game_state_manager)
         self.world = World(self.screen, self.game_state_manager)
 
@@ -38,13 +39,13 @@ class World:
         self.display.fill('blue')
 
 
-class MainMenu:
-    def __init__(self, display, game_state_manager):
-        self.display = display
-        self.game_state_manager = game_state_manager
-
-    def run(self):
-        self.display.fill('red')
+# class MainMenu:
+#     def __init__(self, display, game_state_manager):
+#         self.display = display
+#         self.game_state_manager = game_state_manager
+#
+#     def run(self):
+#         self.display.fill('red')
 
 
 class GameStateManager:

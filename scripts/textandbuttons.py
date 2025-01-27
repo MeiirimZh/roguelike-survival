@@ -1,36 +1,37 @@
 import pygame
 import os
-from config import MONOCRAFT_FONT, game_surface
+from config import MONOCRAFT_FONT
 
 
 class Text:
-    def __init__(self, size, msg, color, position):
+    def __init__(self, size, msg, color, position, display):
         pygame.font.init()
         self.size = size
         self.font = pygame.font.Font(MONOCRAFT_FONT, self.size)
         self.msg = msg
         self.color = color
         self.position = position
+        self.display = display
 
     def draw(self):
-        surface = game_surface
         text_surface = self.font.render(self.msg, False, self.color)
         text_rect = text_surface.get_rect(topleft=self.position)
-        surface.blit(text_surface, text_rect)
+        self.display.blit(text_surface, text_rect)
+
 
 class Button:
-    def __init__(self, x, y, width, height, color, hover_col, pressed_col, font_size, click_func, text="",
-                 font_path=MONOCRAFT_FONT) -> None:
+    def __init__(self, x, y, width, height, color, hover_col, pressed_col, font_size, click_func, display,
+                 text="", font_path=MONOCRAFT_FONT) -> None:
         pygame.font.init()
 
         self.rect = pygame.Rect(x, y, width, height)
         self.color = color
         self.hover_col = hover_col
         self.pressed_col = pressed_col
+        self.display = display
         self.text = text
         self.font_size = font_size
         self.font = pygame.font.Font(font_path, font_size)
-        self.screen = game_surface
         self.is_hovered = False
         self.is_pressed = False
         self.was_pressed = False
@@ -43,10 +44,10 @@ class Button:
 
     def draw(self):
         current_col = self.pressed_col if self.is_pressed else self.hover_col if self.is_hovered else self.color
-        pygame.draw.rect(self.screen, current_col, self.rect)
+        pygame.draw.rect(self.display, current_col, self.rect)
         text_surface = self.font.render(self.text, False, self.text_color)
         text_rect = text_surface.get_rect(center=self.rect.center)
-        self.screen.blit(text_surface, text_rect)
+        self.display.blit(text_surface, text_rect)
 
     def check_inp(self, mouse_pos):
         if self.rect.collidepoint(mouse_pos):
