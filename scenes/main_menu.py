@@ -27,10 +27,9 @@ class MainMenu:
         ]
         self.button_f = ""
 
-    def run(self):
+    def run(self, events):
         mouse_pos = pygame.mouse.get_pos()
         mouse_pressed = pygame.mouse.get_pressed()
-        # mouse_pos = (int(mouse_pos[0]) / SCALE_X, int(mouse_pos[1]) / SCALE_Y)
 
         self.display.fill((0, 0, 0))
 

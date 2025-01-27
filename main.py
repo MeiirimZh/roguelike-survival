@@ -20,12 +20,14 @@ class Game:
 
     def run(self):
         while True:
-            for event in pygame.event.get():
+            events = pygame.event.get()
+
+            for event in events:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
 
-            self.states[self.game_state_manager.get_state()].run()
+            self.states[self.game_state_manager.get_state()].run(events)
 
             pygame.display.update()
             self.clock.tick(FPS)
