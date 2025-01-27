@@ -1,3 +1,4 @@
 SCREENWIDTH = 1280
 SCREENHEIGHT = 720
 FPS = 60
+MONOCRAFT_FONT = 'fonts/Monocraft.otf'
