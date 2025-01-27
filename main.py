@@ -3,6 +3,7 @@ import sys
 
 from config import SCREENWIDTH, SCREENHEIGHT, FPS
 from scenes.main_menu import MainMenu
+from scenes.world import World
 
 
 class Game:
@@ -28,15 +29,6 @@ class Game:
 
             pygame.display.update()
             self.clock.tick(FPS)
-
-
-class World:
-    def __init__(self, display, game_state_manager):
-        self.display = display
-        self.game_state_manager = game_state_manager
-
-    def run(self):
-        self.display.fill('blue')
 
 
 class GameStateManager:
