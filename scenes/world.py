@@ -1,7 +1,7 @@
 import pygame
 
 from characters.player import Player
-from characters.default_enemy import Default_enemy
+from characters.default_enemy import DefaultEnemy
 from objects.player_bullet import PlayerBullet
 
 
@@ -13,7 +13,7 @@ class World:
         self.player = Player(640, 360, 32, 32)
         self.player_bullets = []
 
-        self.enemy = Default_enemy(100, 400, 32, 32)
+        self.enemy = DefaultEnemy(100, 400, 32, 32, 2)
 
         self.scroll = [0, 0]
 
@@ -23,14 +23,16 @@ class World:
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
         self.player.render(self.display)
-        self.enemy.render(self.display, self.scroll)
-        self.enemy.translate_to([640, 360], self.scroll)
+        if self.enemy:
+            self.enemy.render(self.display, self.scroll)
+            self.enemy.translate_to([640, 360], self.scroll)
+
+            if self.enemy.get_damaged(self.player_bullets):
+                self.enemy = None
 
         for bullet in self.player_bullets:
             bullet.update()
             bullet.render(self.display)
-        
-        self.enemy.get_damaged(self.player_bullets)
         
         pygame.draw.rect(self.display, (0, 255, 0), (100-self.scroll[0], 100-self.scroll[1], 40, 40))
 

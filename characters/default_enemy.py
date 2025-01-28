@@ -2,12 +2,13 @@ import pygame
 import math
 
 
-class Default_enemy:
-    def __init__(self, x, y, width, height):
+class DefaultEnemy:
+    def __init__(self, x, y, width, height, speed):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
+        self.speed = speed
 
         self.hp = 15
 
@@ -16,14 +17,14 @@ class Default_enemy:
 
     def translate_to(self, center, scroll):
         if self.x > center[0]+scroll[0]:
-            self.x -= 2
+            self.x -= self.speed
         elif self.x < center[0]+scroll[0]:
-            self.x += 2
+            self.x += self.speed
 
         if self.y > center[1]+scroll[1]:
-            self.y -= 2
+            self.y -= self.speed
         elif self.y < center[1]+scroll[1]:
-            self.y += 2
+            self.y += self.speed
     
     def get_damaged(self, bullets):
         for bullet in bullets[:]:
@@ -33,7 +34,5 @@ class Default_enemy:
             if enemy_rect.colliderect(bullet_rect):
                 bullets.remove(bullet)
                 self.hp -= 5
-                print("hit")
 
-        if self.hp <= 0:
-            del self
+        return self.hp <= 0
